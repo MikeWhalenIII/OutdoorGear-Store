@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OutdoorGear_Store.Models;
 
 namespace OutdoorGear_Store
 {
@@ -24,6 +25,13 @@ namespace OutdoorGear_Store
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            /*
+             * The AddTransient() method tells ASP.NET that when a component, such as a controller, needs an implementation of the IProductRepository interface, 
+             * it should receive an instance of the FakeProductRepository class. 
+             * The AddTransient method specifies that a new FakeProductRepository object should be created each time the IProductRepository interface is needed. 
+             */
+            services.AddTransient<IProductRepository, FakeProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
