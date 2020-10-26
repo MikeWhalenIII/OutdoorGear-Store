@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OutdoorGear_Store.Models
 {
-    interface IProductRepository
+    public interface IProductRepository
     {
         IEnumerable<Product> Products { get; }
     }
