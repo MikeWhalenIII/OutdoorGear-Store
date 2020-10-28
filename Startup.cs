@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OutdoorGear_Store.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace OutdoorGear_Store
 {
@@ -24,14 +25,10 @@ namespace OutdoorGear_Store
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IProductRepository, EFProductRepository>();
 
-            /*
-             * The AddTransient() method tells ASP.NET that when a component, such as a controller, needs an implementation of the IProductRepository interface, 
-             * it should receive an instance of the FakeProductRepository class. 
-             * The AddTransient method specifies that a new FakeProductRepository object should be created each time the IProductRepository interface is needed. 
-             */
-            services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
