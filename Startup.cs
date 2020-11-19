@@ -54,16 +54,38 @@ namespace OutdoorGear_Store
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("pagination",
-                                             "Products/Page{page}",
-                                             defaults: new
-                                             {
-                                                 Controller = "Product",
-                                                 action = "List"
-                                             });
+                // Shows the specified page of items from the specified category
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "{category}/Page{page:int}",
+                    defaults: new { controller = "Product", action = "List" }
+                );
 
-                endpoints.MapControllerRoute("default",
-                                             pattern: "{controller=Product}/{action=List}/{id?}");
+                // Lists the specified page (in this case, page 2), showing items from all categories.
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "Page{page:int}",
+                    defaults: new { controller = "Product", action = "List", page = 1 }
+                );
+
+                // Shows the first page of items from a specific category
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "{category}",
+                    defaults: new { controller = "Product", action = "List", page = 1 }
+                );
+
+                // Lists the first page of products from all categories
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "",
+                    defaults: new { controller = "Product", action = "List", page = 1 }
+                );
+
+                endpoints.MapControllerRoute(
+                    name: null,
+                    pattern: "{controller}/{action}/{id?}"
+                );
             });
         }
     }
