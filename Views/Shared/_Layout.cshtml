@@ -33,7 +33,7 @@
         <main role="main">
             <div class="row">
                 <div class="col col-md-3">
-                    Put something useful here later
+                    @await Component.InvokeAsync("NavigationMenu")
                 </div>
                 <div class="col col-md-9">
                     @RenderBody()
