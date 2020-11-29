@@ -30,6 +30,11 @@ namespace OutdoorGear_Store
             services.AddTransient<IProductRepository, EFProductRepository>();
 
             services.AddControllersWithViews();
+
+            // Sets up the in-memory data store for sessions
+            services.AddMemoryCache();
+            // Registers the services used to access session data
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +52,9 @@ namespace OutdoorGear_Store
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            // Allows the session system to automatically associate requests with sessions when they arrive from the client
+            app.UseSession();
 
             app.UseRouting();
 
