@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using OutdoorGear_Store.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Routing.Template;
+using Microsoft.AspNetCore.Http;
 
 namespace OutdoorGear_Store
 {
@@ -28,6 +29,9 @@ namespace OutdoorGear_Store
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IProductRepository, EFProductRepository>();
+
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp)); 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews();
 
