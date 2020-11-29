@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Outdoor Gear Store</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" asp-href-include="lib/font-awesome/css/*.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -24,6 +25,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
+                        <div class="nav-item float-right">
+                            @await Component.InvokeAsync("CartSummary")
+                        </div>
                     </ul>
                 </div>
             </div>
