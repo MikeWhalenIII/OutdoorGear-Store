@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace OutdoorGear_Store.Models
 {
-    public interface IProductRepository
+    interface IOrderRepository
     {
-        IEnumerable<Order> Orders { get; }
-        void SaveOrder(Order order);
     }
 }
