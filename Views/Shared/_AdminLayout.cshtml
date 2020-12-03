@@ -5,10 +5,20 @@
     <link rel="stylesheet" asp-href-include="lib/bootstrap/dist/css/*.min.css" />
     <title>@ViewBag.Title</title>
 </head>
-<body class="panel panel-default">
-    <div class="panel-heading"><h4>@ViewBag.Title</h4></div>
-    <div class="panel-body">
-        @RenderBody()
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h4>@ViewBag.Title</h4>
+            </div>
+            <div class="card-body">
+                @if (TempData["message"] != null)
+                {
+                    <div class="alert alert-success">@TempData["message"]</div>
+                }
+                @RenderBody()
+            </div>
+        </div>
     </div>
 </body>
 </html>
