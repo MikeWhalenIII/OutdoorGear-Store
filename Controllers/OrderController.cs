@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OutdoorGear_Store.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OutdoorGear_Store.Controllers
 {
@@ -14,7 +15,11 @@ namespace OutdoorGear_Store.Controllers
             cart = cartService;
         }
 
-        public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));[HttpPost]
+        [Authorize]
+        public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));
+        
+        [HttpPost]
+        [Authorize]
         public IActionResult MarkShipped(int orderID)
         {
             Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);

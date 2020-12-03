@@ -12,6 +12,7 @@ using OutdoorGear_Store.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace OutdoorGear_Store
 {
@@ -36,6 +37,8 @@ namespace OutdoorGear_Store
             // Register the order repository as a service
             services.AddTransient<IOrderRepository, EFOrderRepository>();
 
+            services.AddIdentity<AppUser, IdentityRole<Guid>>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
             services.AddControllersWithViews();
 
             // Sets up the in-memory data store for sessions
@@ -59,6 +62,7 @@ namespace OutdoorGear_Store
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
 
             // Allows the session system to automatically associate requests with sessions when they arrive from the client
             app.UseSession();

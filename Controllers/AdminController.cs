@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OutdoorGear_Store.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OutdoorGear_Store.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private IProductRepository repository;
