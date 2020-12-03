@@ -8,11 +8,26 @@ namespace OutdoorGear_Store.Controllers
     {
         private IOrderRepository repository;
         private Cart cart;
-        public OrderController(IOrderRepository repoService, Cart cartService) 
-        { 
-            repository = repoService; 
-            cart = cartService; 
+        public OrderController(IOrderRepository repoService, Cart cartService)
+        {
+            repository = repoService;
+            cart = cartService;
         }
+
+        public ViewResult List() => View(repository.Orders.Where(o => !o.Shipped));[HttpPost]
+        public IActionResult MarkShipped(int orderID)
+        {
+            Order order = repository.Orders.FirstOrDefault(o => o.OrderID == orderID);
+
+            if (order != null)
+            {
+                order.Shipped = true;
+                repository.SaveOrder(order);
+            }
+
+            return RedirectToAction(nameof(List));
+        }
+
         public ViewResult Checkout() => View(new Order());
 
         [HttpPost]
@@ -25,7 +40,7 @@ namespace OutdoorGear_Store.Controllers
             if (ModelState.IsValid)
             {
                 order.Lines = cart.Lines.ToArray();
-                repository.SaveOrder(order); 
+                repository.SaveOrder(order);
                 return RedirectToAction(nameof(Completed));
             }
             else
@@ -34,10 +49,10 @@ namespace OutdoorGear_Store.Controllers
             }
         }
 
-        public ViewResult Completed() 
-        { 
-            cart.Clear(); 
-            return View(); 
+        public ViewResult Completed()
+        {
+            cart.Clear();
+            return View();
         }
     }
 }
