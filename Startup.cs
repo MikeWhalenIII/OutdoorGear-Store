@@ -33,6 +33,9 @@ namespace OutdoorGear_Store
             services.AddScoped<Cart>(sp => SessionCart.GetCart(sp)); 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            // Register the order repository as a service
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
+
             services.AddControllersWithViews();
 
             // Sets up the in-memory data store for sessions

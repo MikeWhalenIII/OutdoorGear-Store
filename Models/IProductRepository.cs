@@ -7,7 +7,7 @@ namespace OutdoorGear_Store.Models
 {
     public interface IProductRepository
     {
-        IEnumerable<Order> Orders { get; }
-        void SaveOrder(Order order);
+        IEnumerable<Product> Products { get; }
+        void SaveProduct(Product product);
     }
 }
