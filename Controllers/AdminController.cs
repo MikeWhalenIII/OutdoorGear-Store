@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OutdoorGear_Store.Models;
+using System.Linq;
 
 namespace OutdoorGear_Store.Controllers
 {
@@ -11,5 +12,8 @@ namespace OutdoorGear_Store.Controllers
             repository = repo;
         }
         public ViewResult Index() => View(repository.Products);
+
+        public ViewResult Edit(int productId) =>
+            View(repository.Products.FirstOrDefault(p => p.ProductID == productId));
     }
 }
