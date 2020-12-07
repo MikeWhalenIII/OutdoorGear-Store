@@ -23,5 +23,7 @@ namespace OutdoorGear_Store.Models
 
         [Required(ErrorMessage = "Please specify a category")]
         public string Category { get; set; }
+
+        public string ImagePath { get; set; }
     }
 }
