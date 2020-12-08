@@ -11,7 +11,7 @@ namespace OutdoorGear_Store.Controllers
     public class ProductController : Controller
     {
         private IProductRepository repository;
-        public int PageSize = 4;
+        public int PageSize = 5;
         public ProductController(IProductRepository repo)
         {
             repository = repo;
@@ -20,17 +20,15 @@ namespace OutdoorGear_Store.Controllers
             => View(new ProductsListViewModel
             {
                 Products = repository.Products
-                    .Where(p => category == null || p.Category == category)
-                    .OrderBy(p => p.ProductID)
-                    .Skip((page - 1) * PageSize)
-                    .Take(PageSize),
+                            .Where(p => category == null || p.Category == category)
+                            .OrderBy(p => p.ProductID)
+                            .Skip((page - 1) * PageSize)
+                            .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = category == null ?
-                        repository.Products.Count() :
-                        repository.Products.Where(e => e.Category == category).Count()
+                    TotalItems = repository.Products.Count()
                 },
                 CurrentCategory = category
             });
