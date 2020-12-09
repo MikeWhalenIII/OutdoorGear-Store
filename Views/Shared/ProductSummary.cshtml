@@ -3,9 +3,9 @@
 <div class="card m-3 rounded">
     <div class="card-block m-2">
         <div class="card-body">
-            <img src="@Model.ImagePath" width="200" height="200" />
+            <img src="@Model.ImagePath" width="200" height="200" class="mx-auto d-block" />
 
-            <h3 class="card-title">
+            <h3 class="card-title text-center">
                 <strong>@Model.Name</strong>
             </h3>
 
@@ -21,7 +21,7 @@
                 <input type="hidden" asp-for="ProductID" />
                 <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
 
-                <button type="submit" class="btn btn-secondary btn-sm float-right">
+                <button type="submit" class="btn btn-primary btn-sm float-right">
                     Add To Cart
                 </button>
             </form>
