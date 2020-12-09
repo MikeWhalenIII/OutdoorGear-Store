@@ -13,7 +13,7 @@
                 @Model.Description
             </p>
 
-            <span class="float-left bg-success text-white rounded m-2 p-1">
+            <span class="float-left bg-secondary text-white rounded m-2 p-1">
                 @Model.Price.ToString("c")
             </span>
 
@@ -21,7 +21,7 @@
                 <input type="hidden" asp-for="ProductID" />
                 <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
 
-                <button type="submit" class="btn btn-info btn-sm float-right">
+                <button type="submit" class="btn btn-secondary btn-sm float-right">
                     Add To Cart
                 </button>
             </form>
