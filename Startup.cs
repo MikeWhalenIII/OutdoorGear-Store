@@ -73,6 +73,11 @@ namespace OutdoorGear_Store
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(
+                //    name: null,
+                //    pattern: "{controller=Home}/{action=Index}/{id?}"
+                //);
+
                 // Shows the specified page of items from the specified category
                 endpoints.MapControllerRoute(
                     name: null,
